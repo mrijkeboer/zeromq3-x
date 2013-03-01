@@ -26,7 +26,11 @@
 #include "poller.hpp"
 #if defined ZMQ_USE_SELECT
 
+#if defined WINCE
+#include "..\builds\msvc\platform.hpp"
+#else
 #include "platform.hpp"
+#endif
 
 #include <stddef.h>
 #include <vector>

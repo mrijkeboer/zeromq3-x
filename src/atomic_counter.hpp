@@ -23,7 +23,12 @@
 #define __ZMQ_ATOMIC_COUNTER_HPP_INCLUDED__
 
 #include "stdint.hpp"
+
+#if defined WINCE
+#include "..\builds\msvc\platform.hpp"
+#else
 #include "platform.hpp"
+#endif
 
 #if defined ZMQ_FORCE_MUTEXES
 #define ZMQ_ATOMIC_COUNTER_MUTEX

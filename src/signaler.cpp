@@ -18,7 +18,11 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+#if defined WINCE
+#include "..\builds\msvc\platform.hpp"
+#else
 #include "platform.hpp"
+#endif
 
 #if defined ZMQ_FORCE_SELECT
 #define ZMQ_SIGNALER_WAIT_BASED_ON_SELECT
@@ -236,8 +240,10 @@ int zmq::signaler_t::make_fdpair (fd_t *r_, fd_t *w_)
     SECURITY_DESCRIPTOR sd = {0};
     SECURITY_ATTRIBUTES sa = {0};
 
+#ifndef WINCE
     InitializeSecurityDescriptor(&sd, SECURITY_DESCRIPTOR_REVISION);
     SetSecurityDescriptorDacl(&sd, TRUE, 0, FALSE);
+#endif
 
     sa.nLength = sizeof(SECURITY_ATTRIBUTES);
     sa.lpSecurityDescriptor = &sd;
@@ -296,9 +302,11 @@ int zmq::signaler_t::make_fdpair (fd_t *r_, fd_t *w_)
     *w_ = WSASocket (AF_INET, SOCK_STREAM, 0, NULL, 0,  0);
     wsa_assert (*w_ != INVALID_SOCKET);
 
+#ifndef WINCE
     //  On Windows, preventing sockets to be inherited by child processes.
     BOOL brc = SetHandleInformation ((HANDLE) *w_, HANDLE_FLAG_INHERIT, 0);
     win_assert (brc);
+#endif
 
     //  Set TCP_NODELAY on writer socket.
     rc = setsockopt (*w_, IPPROTO_TCP, TCP_NODELAY,
@@ -313,14 +321,17 @@ int zmq::signaler_t::make_fdpair (fd_t *r_, fd_t *w_)
     *r_ = accept (listener, NULL, NULL);
     wsa_assert (*r_ != INVALID_SOCKET);
 
+#ifndef WINCE
     //  On Windows, preventing sockets to be inherited by child processes.
     brc = SetHandleInformation ((HANDLE) *r_, HANDLE_FLAG_INHERIT, 0);
     win_assert (brc);
+#endif
 
     //  We don't need the listening socket anymore. Close it.
     rc = closesocket (listener);
     wsa_assert (rc != SOCKET_ERROR);
 
+#ifndef WINCE
     //  Exit the critical section.
     brc = SetEvent (sync);
     win_assert (brc != 0);
@@ -328,6 +339,7 @@ int zmq::signaler_t::make_fdpair (fd_t *r_, fd_t *w_)
     // Release the kernel object
     brc = CloseHandle (sync);
     win_assert (brc != 0);
+#endif
 
     return 0;
 

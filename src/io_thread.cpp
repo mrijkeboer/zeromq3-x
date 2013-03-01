@@ -22,7 +22,11 @@
 #include <new>
 
 #include "io_thread.hpp"
+#if defined WINCE
+#include "..\builds\msvc\platform.hpp"
+#else
 #include "platform.hpp"
+#endif
 #include "err.hpp"
 #include "ctx.hpp"
 

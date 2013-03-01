@@ -23,7 +23,13 @@
 #include <sstream>
 
 #include "tcp_address.hpp"
+
+#if defined WINCE
+#include "..\builds\msvc\platform.hpp"
+#else
 #include "platform.hpp"
+#endif
+
 #include "stdint.hpp"
 #include "err.hpp"
 #include "ip.hpp"

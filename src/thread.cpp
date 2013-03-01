@@ -21,7 +21,11 @@
 
 #include "thread.hpp"
 #include "err.hpp"
+#if defined WINCE
+#include "..\builds\msvc\platform.hpp"
+#else
 #include "platform.hpp"
+#endif
 
 #ifdef ZMQ_HAVE_WINDOWS
 

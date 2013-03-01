@@ -22,7 +22,11 @@
 #ifndef __ZMQ_THREAD_HPP_INCLUDED__
 #define __ZMQ_THREAD_HPP_INCLUDED__
 
+#if defined WINCE
+#include "..\builds\msvc\platform.hpp"
+#else
 #include "platform.hpp"
+#endif
 
 #ifdef ZMQ_HAVE_WINDOWS
 #include "windows.hpp"

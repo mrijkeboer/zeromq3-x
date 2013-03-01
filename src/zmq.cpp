@@ -20,7 +20,11 @@
 */
 #define ZMQ_TYPE_UNSAFE
 
+#if defined WINCE
+#include "..\builds\msvc\platform.hpp"
+#else
 #include "platform.hpp"
+#endif
 
 #if defined ZMQ_FORCE_SELECT
 #define ZMQ_POLL_BASED_ON_SELECT

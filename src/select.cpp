@@ -22,7 +22,11 @@
 #include "select.hpp"
 #if defined ZMQ_USE_SELECT
 
+#if defined WINCE
+#include "..\builds\msvc\platform.hpp"
+#else
 #include "platform.hpp"
+#endif
 #if defined ZMQ_HAVE_WINDOWS
 #include "windows.hpp"
 #elif defined ZMQ_HAVE_HPUX

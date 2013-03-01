@@ -19,7 +19,11 @@
 */
 
 #include <stddef.h>
+#if defined WINCE
+#include "..\builds\msvc\platform.hpp"
+#else
 #include "platform.hpp"
+#endif
 #include "proxy.hpp"
 #include "likely.hpp"
 

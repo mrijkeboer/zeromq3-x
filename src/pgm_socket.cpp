@@ -20,7 +20,11 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+#if defined WINCE
+#include "..\builds\msvc\platform.hpp"
+#else
 #include "platform.hpp"
+#endif
 
 #ifdef ZMQ_HAVE_OPENPGM
 

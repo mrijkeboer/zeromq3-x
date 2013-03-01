@@ -20,7 +20,11 @@
 */
 
 #include "err.hpp"
+#if defined WINCE
+#include "..\builds\msvc\platform.hpp"
+#else
 #include "platform.hpp"
+#endif
 
 const char *zmq::errno_to_string (int errno_)
 {

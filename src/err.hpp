@@ -28,14 +28,15 @@
 #include <assert.h>
 #if defined WINCE
 #include "..\builds\msvc\errno.hpp"
+#include "..\builds\msvc\platform.hpp"
 #else
 #include <errno.h>
+#include "platform.hpp"
 #endif
 #include <string.h>
 #include <stdlib.h>
 #include <stdio.h>
 
-#include "platform.hpp"
 #include "likely.hpp"
 
 #ifdef ZMQ_HAVE_WINDOWS

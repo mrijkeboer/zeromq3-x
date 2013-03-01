@@ -19,7 +19,11 @@
 */
 
 #include "clock.hpp"
+#if defined WINCE
+#include "..\builds\msvc\platform.hpp"
+#else
 #include "platform.hpp"
+#endif
 #include "likely.hpp"
 #include "config.hpp"
 #include "err.hpp"

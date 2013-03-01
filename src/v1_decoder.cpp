@@ -22,7 +22,12 @@
 #include <stdlib.h>
 #include <string.h>
 
+#if defined WINCE
+#include "..\builds\msvc\platform.hpp"
+#else
 #include "platform.hpp"
+#endif
+
 #ifdef ZMQ_HAVE_WINDOWS
 #include "windows.hpp"
 #endif

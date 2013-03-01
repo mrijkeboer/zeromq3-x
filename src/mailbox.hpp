@@ -24,7 +24,11 @@
 
 #include <stddef.h>
 
+#if defined WINCE
+#include "..\builds\msvc\platform.hpp"
+#else
 #include "platform.hpp"
+#endif
 #include "signaler.hpp"
 #include "fd.hpp"
 #include "config.hpp"

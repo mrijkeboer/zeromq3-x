@@ -21,7 +21,11 @@
 #ifndef __IPC_CONNECTER_HPP_INCLUDED__
 #define __IPC_CONNECTER_HPP_INCLUDED__
 
+#if defined WINCE
+#include "..\builds\msvc\platform.hpp"
+#else
 #include "platform.hpp"
+#endif
 
 #if !defined ZMQ_HAVE_WINDOWS && !defined ZMQ_HAVE_OPENVMS
 

@@ -24,7 +24,11 @@
 #include <string>
 #include <algorithm>
 
+#if defined WINCE
+#include "..\builds\msvc\platform.hpp"
+#else
 #include "platform.hpp"
+#endif
 
 #if defined ZMQ_HAVE_WINDOWS
 #include "windows.hpp"
@@ -49,7 +53,11 @@
 #include "pipe.hpp"
 #include "err.hpp"
 #include "ctx.hpp"
+#if defined WINCE
+#include "..\builds\msvc\platform.hpp"
+#else
 #include "platform.hpp"
+#endif
 #include "likely.hpp"
 #include "msg.hpp"
 #include "address.hpp"

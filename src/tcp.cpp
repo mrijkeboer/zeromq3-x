@@ -22,7 +22,11 @@
 #include "ip.hpp"
 #include "tcp.hpp"
 #include "err.hpp"
+#if defined WINCE
+#include "..\builds\msvc\platform.hpp"
+#else
 #include "platform.hpp"
+#endif
 
 #if defined ZMQ_HAVE_WINDOWS
 #include "windows.hpp"

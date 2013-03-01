@@ -23,7 +23,12 @@
 
 #include <string>
 
+#if defined WINCE
+#include "..\builds\msvc\platform.hpp"
+#else
 #include "platform.hpp"
+#endif
+
 #include "tcp_listener.hpp"
 #include "stream_engine.hpp"
 #include "io_thread.hpp"
@@ -173,9 +178,11 @@ int zmq::tcp_listener_t::set_address (const char *addr_)
         errno = wsa_error_to_errno (WSAGetLastError ());
         return -1;
     }
+#ifndef WINCE
     //  On Windows, preventing sockets to be inherited by child processes.
     BOOL brc = SetHandleInformation ((HANDLE) s, HANDLE_FLAG_INHERIT, 0);
     win_assert (brc);
+#endif
 #else
     if (s == -1)
         return -1;
@@ -256,9 +263,11 @@ zmq::fd_t zmq::tcp_listener_t::accept ()
             WSAGetLastError () == WSAENOBUFS);
         return retired_fd;
     }
+#ifndef WINCE
     //  On Windows, preventing sockets to be inherited by child processes.
     BOOL brc = SetHandleInformation ((HANDLE) sock, HANDLE_FLAG_INHERIT, 0);
     win_assert (brc);
+#endif
 #else
     if (sock == -1) {
         errno_assert (errno == EAGAIN || errno == EWOULDBLOCK ||

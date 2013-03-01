@@ -25,7 +25,11 @@
 #include "tcp_connecter.hpp"
 #include "stream_engine.hpp"
 #include "io_thread.hpp"
+#if defined WINCE
+#include "..\builds\msvc\platform.hpp"
+#else
 #include "platform.hpp"
+#endif
 #include "random.hpp"
 #include "err.hpp"
 #include "ip.hpp"
